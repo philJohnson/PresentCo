@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/Image";
 import { useRouter } from 'next/router'
 import { getCountry } from '../utils/getCountry'
 import Map from "../components/Map"
@@ -28,7 +29,9 @@ const CountryPage = () => {
             {country.subregion && <Typography variant="h5"><strong>Sub Region:</strong> {country.subregion}</Typography>}
           </Grid>
           <Grid item xs={4}>
-            <img style={{maxWidth: '100%'}} src={country.flag} />
+            <div style={{ position: "relative", width: "100%", height: '100%'}}>
+              <Image alt={`Flag of ${country.name}`} style={{maxWidth: '100%'}} layout="fill" objectFit="contain" src={country.flag} />
+            </div>
           </Grid>
           {country.latlng && country.latlng.length > 0 && 
           <Grid item xs={12}>

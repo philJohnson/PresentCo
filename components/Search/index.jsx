@@ -41,7 +41,6 @@ const Search = () => {
         <SearchBox flexGrow={1}>
           <TextField
             type="text"
-            label="Filled"
             label="Search Country Name"
             inputRef={searchEl}
             value={value}
