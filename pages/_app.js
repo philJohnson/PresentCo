@@ -1,4 +1,4 @@
-import "../styles/globals.css";
+import CssBaseline from '@material-ui/core/CssBaseline';
 import { QueryClient, QueryClientProvider } from "react-query";
 import { RecoilRoot } from 'recoil'
 import Layout from "../layout";
@@ -10,6 +10,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
+        <CssBaseline />
         <Layout>
           <Component {...pageProps} />
         </Layout>

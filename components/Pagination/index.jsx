@@ -1,6 +1,8 @@
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { getPaginationState } from "../../selectors";
 import { paginationState } from "../../atoms";
+import {ArrowLeft, ArrowRight} from "@material-ui/icons";
+import {ButtonGroup, Button} from '@material-ui/core';
 
 const Pagination = () => {
   const paginationStateValue = useRecoilValue(getPaginationState);
@@ -13,30 +15,26 @@ const Pagination = () => {
   };
 
   return (
-    <ul>
-      {paginationStateValue.hasPrevious && (
-        <li onClick={() => setPagination(paginationStateValue.page - 1)}>
-          Previous
-        </li>
-      )}
+    <ButtonGroup>
+        <Button onClick={() => setPagination(paginationStateValue.page - 1)} disabled={!paginationStateValue.hasPrevious}>
+            <ArrowLeft />
+        </Button>
       {[...Array(paginationStateValue.pages)].map((e, i) => {
         const page = i + 1;
         return (
-          <li
+          <Button
             key={i}
-            isActive={page === paginationStateValue.page}
+            disabled={page === paginationStateValue.page}
             onClick={() => setPagination(page)}
           >
             {page}
-          </li>
+          </Button>
         );
       })}
-      {paginationStateValue.hasNext && (
-        <li onClick={() => setPagination(paginationStateValue.page + 1)}>
-          Next
-        </li>
-      )}
-    </ul>
+        <Button onClick={() => setPagination(paginationStateValue.page + 1)} disabled={!paginationStateValue.hasNext}>
+          <ArrowRight />
+        </Button>
+    </ButtonGroup>
   );
 };
 export default Pagination;

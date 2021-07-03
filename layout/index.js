@@ -2,6 +2,11 @@ import { useEffect } from "react";
 import { useCountries } from "../hooks/useCountries";
 import { useSetRecoilState } from "recoil";
 import { countriesState } from "../atoms";
+import Backdrop from '@material-ui/core/Backdrop';
+import Container from '@material-ui/core/Container';
+
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 const Layout = ({children}) =>{
 
@@ -12,12 +17,12 @@ const Layout = ({children}) =>{
     setCountries(data);
   }, data);
 
-  if (isLoading) return "Loading...";
+  if (isLoading) return <Backdrop open={true}><CircularProgress /></Backdrop>;
 
   if (error) return "An error has occurred: " + error.message;
   
-  return <>
+  return <Container maxWidth="md">
     {children}
-  </>
+  </Container>
 }
 export default Layout;
