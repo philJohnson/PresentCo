@@ -35,9 +35,9 @@ const Search = () => {
 
 
     return <form onSubmit={(e) => SearchCountries(e)}>
-        <input type="text" ref={searchEl} value={value} onChange={(e) => setValue(e.target.value)} />
-        <button onClick={(e) => resetSearch(e)}>Clear Search</button>
-        <input type="submit" />
+        <input type="text" placeholder="Search Country Name" ref={searchEl} value={value} onChange={(e) => setValue(e.target.value)} />
+        {value && <button type="reset" onClick={(e) => resetSearch(e)}>Clear Search</button>}
+        <button type="submit">Search</button>
     </form>
 }
 

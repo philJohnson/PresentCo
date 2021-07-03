@@ -1,4 +1,4 @@
-import { selector, useSetRecoilState } from "recoil";
+import { selector } from "recoil";
 import { countriesState, paginationState, countriesSearchState } from "../atoms";
 
 
