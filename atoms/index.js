@@ -15,7 +15,7 @@ export const paginationState = atom({
   default: {
     page: 1,
     pages: 1,
-    pageSize: 20,
+    pageSize: 10,
     hasPrevious: false,
     hasNext: true,
   },

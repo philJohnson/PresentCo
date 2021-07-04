@@ -1,34 +1,104 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## The Challenge
 
-## Getting Started
+Build an app that can display a list of countries with the capability of filtering results through a search mechanism, paginating countries and showing information about each individual country.
 
-First, run the development server:
+Use the [RESTCountries endpoint](https://restcountries.eu/rest/v2/all) to get the list of all countries.
 
-```bash
-npm run dev
-# or
-yarn dev
+## Requirements
+
+- Create a web application using React consisting of two pages, as described in the sections below.
+- Write your own pagination logic
+- Write your own search logic, no need for super advanced search logic
+- You are free to use a UI library such as Material-UI
+
+### Countries page
+
+```
+Scenario 1: Countries loading
+Given I am on the countries page
+When the countries haven't finished loading
+Then I should see a loading spinner
+
+Scenario 2: Countries loaded
+Given I am on the countries page
+When the countries have finished loading
+Then I should see the first 10 countries in alphabetical order
+  And display their country name
+
+Scenario 3: Search
+Given I have entered text in the search input
+When I click the search button
+Then I should update the countries list to only show countries which contain the search text
+
+Scenario 4: Hide next page button
+Given there are no more countries on the next page
+When the countries list has updated
+Then hide the button to paginate to the next page
+
+Scenario 5: Hide previous page button
+Given there are no more countries on the previous page
+When the countries list has updated
+Then hide the button to paginate to the previous page
+
+Scenario 6: Clicking the next page button
+Given the next page button is visible
+When I click on the next page button
+Then I should see the next 10 countries in alphabetical order
+
+Scenario 7: Clicking the previous page button
+Given the previous page button is visible
+When I click on the previous page button
+Then I should see the previous 10 countries in alphabetical order
+
+Scenario 8: Clicking a country
+Given the countries list has loaded
+When I click a country
+Then take me to that country's page
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Country page
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```
+Scenario 1: Country loading
+Given I am on the country page
+When the country hasn't finished loading
+Then I should see a loading spinner
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Scenario 2: Country loaded
+Given I am on the country page
+When the country has finished loading
+Then I should see the country's flag
+  And the country's name
+  And the country's population
+  And the country's demonym
+```
+## Result
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Typically I would have built this as a react app and used ContextAPI along with perhaps a UI library such as AntD or Theme UI. Given Present Co are looking to use Recoil, ReactQuery and NextJS I thought I'd try these out. I've also used Material UI as it's mentioned in this ReadMe.
 
-## Learn More
+This is the first time using Recoil, ReactQuery, NextJS and Material-ui. I've not focued on design as heavily however I've tried to focus on UX.
 
-To learn more about Next.js, take a look at the following resources:
+I've used NextJS SSR for the API call. I'm aware that this may not be ideal for all scenarios however given that the scope of this request I made the assumption that it would be fine. Removing the request from SSR is simple enough to do.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Countries page
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Countries are already in alphabetical order however if needed to change the base order I'd do that within the ReactQuery call.
+```
+Scenario 3
+I've opted to seach only by name as a simple solution. Ideally I'd use a search library which would allow a more complex search solution.
+```
+```
+Secnario 4 & 5
+Instead of hiding previous and next buttons I've opted to disable them. I'm not a fan of hiding consitent UI elements.
+```
 
-## Deploy on Vercel
+### Country Page
+```
+Scenario 1
+There shouldn't be a loading spinner if coming from the counties page as the countries are stored in state. If you reload the page then it will have a loading state.
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```
+Scenario 2
+I've opted to also include a google map with a pin to the country.
+```

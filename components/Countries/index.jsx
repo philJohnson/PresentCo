@@ -20,9 +20,7 @@ const Countries = () => {
           <div key={key}>
             <ListItem button>
               <Link href={`/${encodeURIComponent(country.alpha3Code)}`}>
-                <a>
-                    <ListItemText primary={country.name} />
-                </a>
+                <ListItemText component='a' primary={country.name} />
               </Link>
             </ListItem>
             <Divider />

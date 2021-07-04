@@ -66,6 +66,7 @@ const Pagination = () => {
           style={{ width: "100px" }}
           onChange={setPageSize}
         >
+          <MenuItem value={10}>10</MenuItem>
           <MenuItem value={15}>15</MenuItem>
           <MenuItem value={20}>20</MenuItem>
           <MenuItem value={25}>25</MenuItem>

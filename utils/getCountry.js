@@ -8,5 +8,5 @@ export const getCountry = (code) => {
             return country.alpha3Code === code;
         })
     }
-    return null;
+    return null; //Ideally this would throw 404.
 }
